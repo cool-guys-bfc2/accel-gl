@@ -38,7 +38,55 @@ function drawShape(type, coords, options = {}) {
     if (options.fill) ctx.fill();
     ctx.stroke();
 }
+const canvas = document.getElementById("myCanvas");
+const ctx = canvas.getContext("2d");
 
+/**
+ * Draws a 3D-style colored cube
+ * @param {number} x - Center X coordinate
+ * @param {number} y - Center Y coordinate
+ * @param {number} s - Size/Scale
+ * @param {Array} colors - Colors for [Top, Right, Left] faces
+ */
+function drawCube(x, y, s, colors = ['#eee', '#ccc', '#999']) {
+  // Define the points for an isometric cube projection
+  // These calculations create the "diamond" shapes for each face
+  
+  // 1. Top Face
+  ctx.beginPath();
+  ctx.fillStyle = colors[0];
+  ctx.moveTo(x, y);
+  ctx.lineTo(x + s, y - s * 0.5);
+  ctx.lineTo(x, y - s);
+  ctx.lineTo(x - s, y - s * 0.5);
+  ctx.closePath();
+  ctx.fill();
+
+  // 2. Right Face
+  ctx.beginPath();
+  ctx.fillStyle = colors[1];
+  ctx.moveTo(x, y);
+  ctx.lineTo(x + s, y - s * 0.5);
+  ctx.lineTo(x + s, y + s * 0.5);
+  ctx.lineTo(x, y + s);
+  ctx.closePath();
+  ctx.fill();
+
+  // 3. Left Face
+  ctx.beginPath();
+  ctx.fillStyle = colors[2];
+  ctx.moveTo(x, y);
+  ctx.lineTo(x - s, y - s * 0.5);
+  ctx.lineTo(x - s, y + s * 0.5);
+  ctx.lineTo(x, y + s);
+  ctx.closePath();
+  ctx.fill();
+}
+
+/* Draw a few colored cubes
+drawCube(150, 100, 50, ['#FF5733', '#C70039', '#900C3F']); // Reddish
+drawCube(300, 150, 40, ['#33FF57', '#28B463', '#1D8348']); // Greenish
+drawCube(100, 250, 60, ['#3357FF', '#2E86C1', '#1B4F72']); // Bluish*/
 // --- EXAMPLES ---
 /*
 // 1. A Rectangle (Filled)
